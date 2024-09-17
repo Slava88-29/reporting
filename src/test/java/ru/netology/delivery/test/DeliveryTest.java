@@ -1,9 +1,9 @@
 package ru.netology.delivery.test;
 
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
 
@@ -17,7 +17,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 class DeliveryTest {
-
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
@@ -63,5 +66,9 @@ class DeliveryTest {
         // firstMeetingDate и secondMeetingDate. Можно также вызывать методы generateCity(locale),
         // generateName(locale), generatePhone(locale) для генерации и получения в тесте соответственно города,
         // имени и номера телефона без создания пользователя в методе generateUser(String locale) в датагенераторе
+    }
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 }

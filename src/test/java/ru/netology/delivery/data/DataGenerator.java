@@ -34,7 +34,7 @@ public class DataGenerator {
         // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
         // использовать Faker
         Faker faker = new Faker(new Locale(locale));
-        String name = faker.name().fullName();
+        String name = faker.name().firstName()+" "+faker.name().lastName();
         return name;
     }
 
